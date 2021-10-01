@@ -10,9 +10,35 @@ For assistance:
 */
 
 // Global Variables
+const header = document.querySelector('.header');
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
+const search = document.querySelector('#search');
 const perPage = 9;
+
+
+// Insert search bar to filter students by name
+let searchBar = `
+    <label for="search" class="student-search">
+      <span>Search by Name</span>
+      <input id="search" placeholder="Search by name...">
+      <button type="button"><img src="img/icn-search.svg" alt="Search Icon"></button>
+    </label>
+    `;
+
+header.insertAdjacentHTML('beforeend', searchBar);
+
+// create an arry of only the names of the Students
+
+let namesOnly = [];
+for ( let i = 0; i < data.length; i++ ) {
+  namesOnly.push(`"name: ${data[i].name.first} ${data[i].name.last}"`);
+}
+
+// fucntion 'search' that runs on keyup or search button click
+
+
+
 
 
 /*
@@ -61,7 +87,7 @@ function addPagination(list) {
   }
 
   linkList.insertAdjacentHTML('beforeend', button);
-  document.querySelector('button').className = "active";
+  linkList.querySelector('button').className = "active";
 
   linkList.addEventListener('click', (e) => {
     if (e.target.tagName == 'BUTTON') {
