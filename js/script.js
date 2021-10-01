@@ -45,12 +45,23 @@ function searchFunc(searchInput, names) {
     if (searchInput.value.length != 0 &&
      names[i].name.toLowerCase().includes(searchInput.value.toLowerCase()) ) {
        matchedNames.push(data[i]);
-     } else {
-       
      }
+   }
+
+  if (matchedNames.length > 0) {
+    showPage(matchedNames, 1);
+    addPagination(matchedNames);
+  } else {
+      studentList.innerHTML = '';
+      let noResults = '';
+      noResults += `
+      <li class = "student-item cf">
+        <div class="no-results">
+           <p>No Results to Display</p>
+        </div>
+      </li>`;
+     studentList.insertAdjacentHTML('beforeend', noResults);
   }
-  showPage(matchedNames, 1);
-  addPagination(matchedNames);
 }
 
 search.addEventListener('keyup', () => {
@@ -110,8 +121,9 @@ function addPagination(list) {
   }
 
   linkList.insertAdjacentHTML('beforeend', button);
-  linkList.querySelector('button').className = "active";
-
+  if (list.length > 0) {
+    linkList.querySelector('button').className = "active";
+  }
   linkList.addEventListener('click', (e) => {
     if (e.target.tagName == 'BUTTON') {
       document.querySelector('.active').className = '';
