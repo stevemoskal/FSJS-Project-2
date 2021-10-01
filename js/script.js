@@ -13,7 +13,6 @@ For assistance:
 const header = document.querySelector('.header');
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
-const search = document.querySelector('#search');
 const perPage = 9;
 
 
@@ -26,18 +25,42 @@ let searchBar = `
     </label>
     `;
 
+
 header.insertAdjacentHTML('beforeend', searchBar);
+const search = document.querySelector('#search');
+const searchBtn = document.querySelector('button');
 
 // create an arry of only the names of the Students
 
 let namesOnly = [];
 for ( let i = 0; i < data.length; i++ ) {
-  namesOnly.push(`"name: ${data[i].name.first} ${data[i].name.last}"`);
+  namesOnly.push( {name: `${data[i].name.first} ${data[i].name.last}`} );
 }
 
 // fucntion 'search' that runs on keyup or search button click
 
+function searchFunc(searchInput, names) {
+  let matchedNames = [];
+  for ( let i = 0; i < names.length; i++ ) {
+    if (searchInput.value.length != 0 &&
+     names[i].name.toLowerCase().includes(searchInput.value.toLowerCase()) ) {
+       matchedNames.push(data[i]);
+     } else {
+       
+     }
+  }
+  showPage(matchedNames, 1);
+  addPagination(matchedNames);
+}
 
+search.addEventListener('keyup', () => {
+  if (search.value.length != 0){
+    searchFunc(search, namesOnly);
+  } else {
+    showPage(data, 1);
+    addPagination(data);
+  }
+});
 
 
 
