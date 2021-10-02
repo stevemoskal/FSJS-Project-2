@@ -28,7 +28,7 @@ let searchBar = `
 
 header.insertAdjacentHTML('beforeend', searchBar);
 const search = document.querySelector('#search');
-const searchBtn = document.querySelector('button');
+const searchBtn = header.querySelector('button');
 
 // create an arry of only the names of the Students
 
@@ -66,6 +66,15 @@ function searchFunc(searchInput, names) {
 }
 
 search.addEventListener('keyup', () => {
+  if (search.value.length != 0){
+    searchFunc(search, namesOnly);
+  } else {
+    showPage(data, 1);
+    addPagination(data);
+  }
+});
+
+searchBtn.addEventListener('click', () => {
   if (search.value.length != 0){
     searchFunc(search, namesOnly);
   } else {
