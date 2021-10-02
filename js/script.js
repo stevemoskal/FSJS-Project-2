@@ -53,11 +53,12 @@ function searchFunc(searchInput, names) {
     addPagination(matchedNames);
   } else {
       studentList.innerHTML = '';
+      linkList.innerHTML = '';
       let noResults = '';
       noResults += `
       <li class = "student-item cf">
-        <div class="no-results">
-           <p>No Results to Display</p>
+        <div>
+           <span class="no-results">No Results to Display</span>
         </div>
       </li>`;
      studentList.insertAdjacentHTML('beforeend', noResults);
@@ -72,8 +73,6 @@ search.addEventListener('keyup', () => {
     addPagination(data);
   }
 });
-
-
 
 /*
 Create the `showPage` function
@@ -112,29 +111,26 @@ function addPagination(list) {
   let numOfPages = Math.ceil(list.length / perPage);
   let button = '';
   linkList.innerHTML = '';
+    if (list.length != 0) {
+      for ( let i = 1; i <= numOfPages; i++ ) {
+        button += `
+        <li>
+          <button type = "button">${i}</button>
+        </li>`;
+      }
 
-  for ( let i = 1; i <= numOfPages; i++ ) {
-    button += `
-    <li>
-      <button type = "button">${i}</button>
-    </li>`;
-  }
+      linkList.insertAdjacentHTML('beforeend', button);
 
-  linkList.insertAdjacentHTML('beforeend', button);
-  if (list.length > 0) {
-    linkList.querySelector('button').className = "active";
+      linkList.querySelector('button').className = "active";
+      linkList.addEventListener('click', (e) => {
+        if (e.target.tagName == 'BUTTON') {
+          document.querySelector('.active').className = '';
+          e.target.className = "active";
+          showPage(list, e.target.textContent);
+        }
+    });
   }
-  linkList.addEventListener('click', (e) => {
-    if (e.target.tagName == 'BUTTON') {
-      document.querySelector('.active').className = '';
-      e.target.className = "active";
-      showPage(list, e.target.textContent);
-    }
-  });
 }
-
-
-
 
 
 // Call functions
