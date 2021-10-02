@@ -146,6 +146,9 @@ header h2 {
 .pagination {
   margin: 30px 0 60px;
   text-align: center;
+	/* new CSS for maxPerPage buttons */
+	display: flex;
+	justify-content: space-between;
 }
 
 .pagination li {
@@ -153,7 +156,7 @@ header h2 {
   padding: 0 3px;
 }
 
-.pagination li button {
+.pagination li button, .pagination div button {
   font-size: 1em;
   cursor: pointer;
 	outline: none;
@@ -167,7 +170,8 @@ header h2 {
 	transition: 0.4s;
 }
 
-.pagination li button.active, .pagination li button:hover {
+.pagination li button.active, .pagination li button:hover,
+.pagination div button.active, .pagination div button:hover {
   background-color: #1e90ff;
   color: #fff;
 }
@@ -195,20 +199,33 @@ header h2 {
 	margin-bottom: 15px;
 }
 
+/* new CSS for maxPerPage buttons */
 
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.show {display: block;}
 
 @media screen and (min-width: 700px) {
 
 	.page {
 		width: 70%;
 	}
-	
+
 	header {
 		flex-flow: row;
 		align-items: center;
 		padding: 3em 0;
 	}
-	
+
 	header h2 {
     margin-right: auto;
 		margin-bottom: 0;

@@ -8,7 +8,8 @@ FSJS Project 2 - Data Pagination and Filtering
 const header = document.querySelector('.header');
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
-const perPage = 9;
+const footer = document.querySelector('.pagination');
+let perPage = 9;
 
 
 // Insert search bar to filter students by name
@@ -108,17 +109,17 @@ function showPage(list, page) {
 
 function addPagination(list) {
   let numOfPages = Math.ceil(list.length / perPage);
-  let button = '';
+  let buttons = '';
   linkList.innerHTML = '';
     if (list.length != 0) {
       for ( let i = 1; i <= numOfPages; i++ ) {
-        button += `
+        buttons += `
         <li>
           <button type = "button">${i}</button>
         </li>`;
       }
 
-      linkList.insertAdjacentHTML('beforeend', button);
+      linkList.insertAdjacentHTML('afterbegin', buttons);
 
       linkList.querySelector('button').className = "active";
       linkList.addEventListener('click', (e) => {
@@ -131,6 +132,40 @@ function addPagination(list) {
   }
 }
 
+// selection dropdown menu for perPage Variables, coding help provided by https://www.w3schools.com/howto/howto_js_dropdown.asp
+
+let maxPerPage = `
+  <div class="dropdown">
+    <span>Display </span>
+    <button type="button" class="active">${perPage}</button>
+    <span> Students per page</span>
+    <div id="myDropdown" class="dropdown-content">
+      <button type="button">3</button>
+      <button type="button">6</button>
+      <button type="button">9</button>
+      <button type="button">12</button>
+    </div>
+  </div>`;
+
+footer.insertAdjacentHTML('beforeend', maxPerPage);
+const dropdown = document.querySelector('.dropdown');
+const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+dropdown.addEventListener('click', (e) => {
+  if(e.target.tagName == "BUTTON") {
+    dropdownContent.className = "dropdown-content show";
+  }
+});
+
+dropdownContent.addEventListener('click', (e) => {
+  if (e.target.tagName == 'BUTTON') {
+    let newPerPage = e.target.textContent;
+    let newPerPageInt = parseInt(newPerPage);
+    perPage = newPerPage;
+    console.log(perPage);
+  }
+  // dropdownContent.className = "dropdown-content";
+});
 
 // function calls on page load
 
