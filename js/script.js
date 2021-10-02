@@ -3,11 +3,6 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
 
 // Global Variables
 const header = document.querySelector('.header');
@@ -83,10 +78,7 @@ searchBtn.addEventListener('click', () => {
   }
 });
 
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+// 'showPage' fucntion that prints the page of students based on perPage variable
 
 function showPage(list, page) {
   const startIndex = (page * perPage) - perPage;
@@ -112,10 +104,8 @@ function showPage(list, page) {
   studentList.insertAdjacentHTML('beforeend', studentItem);
 }
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+// 'addPagination' function that creates page buttons based on perPage and amount of students in array
+
 function addPagination(list) {
   let numOfPages = Math.ceil(list.length / perPage);
   let button = '';
@@ -142,7 +132,7 @@ function addPagination(list) {
 }
 
 
-// Call functions
+// function calls on page load
 
 showPage(data, 1);
 addPagination(data);
