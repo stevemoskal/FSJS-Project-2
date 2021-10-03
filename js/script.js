@@ -4,7 +4,6 @@ FSJS Project 2 - Data Pagination and Filtering
 */
 
 
-// Global Variables
 const header = document.querySelector('.header');
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
@@ -34,7 +33,7 @@ for ( let i = 0; i < data.length; i++ ) {
   namesOnly.push( {name: `${data[i].name.first} ${data[i].name.last}`} );
 }
 
-// fucntion 'search' that runs on keyup or search button click
+// fucntion 'searchFunc' that runs on keyup or search button click
 
 function searchFunc(searchInput, names) {
   let matchedNames = [];
@@ -75,7 +74,8 @@ search.addEventListener('keyup', () => {
   }
 });
 
-searchBtn.addEventListener('click', () => {
+searchBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   if (search.value.length != 0){
     searchFunc(search, namesOnly);
   } else {
@@ -160,10 +160,10 @@ const dropdownContent = document.querySelector('.dropdown-content');
 
 dropdown.addEventListener('click', (e) => {
   if(e.target.tagName == "BUTTON") {
-    if(e.target.className != 'show') {
-      dropdownContent.className = "dropdown-content show";
-    } else {
+    if(dropdownContent.className === 'dropdown-content show') {
       dropdownContent.className = "dropdown-content";
+    } else {
+      dropdownContent.className = "dropdown-content show";
     }
   }
 });

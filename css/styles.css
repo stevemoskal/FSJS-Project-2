@@ -168,7 +168,7 @@ header h2 {
   text-decoration: none;
 	color: #1e90ff;
 	box-shadow: 0 1px 8px 0 rgba(22, 42, 90, 0.05);
-	margin-bottom: 1em;
+	margin-bottom: 0.5em;
 	transition: 0.4s;
 }
 
@@ -239,12 +239,14 @@ header h2 {
 		box-shadow: 0 4px 16px 0 rgba(22, 42, 90, 0.09);
 	}
 
+/* new CSS for maxPerPage buttons */
 	.pagination {
 		flex-direction: row;
 	}
 
 	.dropdown {
 		margin-top: 0;
-		margin-left: 2em;
+		margin-bottom: 0;
+		margin-left: 1em;
 	}
 }
