@@ -160,7 +160,11 @@ const dropdownContent = document.querySelector('.dropdown-content');
 
 dropdown.addEventListener('click', (e) => {
   if(e.target.tagName == "BUTTON") {
-    dropdownContent.className = "dropdown-content show";
+    if(e.target.className != 'show') {
+      dropdownContent.className = "dropdown-content show";
+    } else {
+      dropdownContent.className = "dropdown-content";
+    }
   }
 });
 
@@ -178,7 +182,12 @@ dropdownContent.addEventListener('click', (e) => {
   }
 });
 
-
+document.addEventListener('click', (e) => {
+  if (e.target.className != 'dropdown-content' &&
+      e.target.className != 'active-dropdown') {
+    dropdownContent.className = "dropdown-content";
+  }
+});
 
 // function calls on page load
 
