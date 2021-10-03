@@ -5,7 +5,7 @@
 
 This repository was designed for the Treehouse TechDegree course, Project-2: Pagination.
 
-This project is complete, and I am hoping to obtain an "Exceed Expectations" grade based on the grading key provided.
+This project is complete, and I am hoping to obtain an "Exceeds Expectations" grade based on the grading key provided.
 
 There are three different types of code contained in this repository: HTML, CSS and JavaScript. The HTML and CSS were provided by Treehouse, and it was my objective to complete the JavaScript code.
 
