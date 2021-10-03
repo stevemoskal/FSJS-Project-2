@@ -9,6 +9,7 @@ const header = document.querySelector('.header');
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
 const footer = document.querySelector('.pagination');
+let activeList = "";
 let perPage = 9;
 
 
@@ -43,22 +44,26 @@ function searchFunc(searchInput, names) {
        matchedNames.push(data[i]);
      }
    }
-
   if (matchedNames.length > 0) {
     showPage(matchedNames, 1);
     addPagination(matchedNames);
   } else {
-      studentList.innerHTML = '';
-      linkList.innerHTML = '';
-      let noResults = '';
-      noResults += `
-      <li class = "student-item cf">
-        <div>
-           <span class="no-results">No Results to Display</span>
-        </div>
-      </li>`;
-     studentList.insertAdjacentHTML('beforeend', noResults);
+   noResult();
   }
+}
+
+function noResult() {
+  studentList.innerHTML = '';
+  linkList.innerHTML = '';
+  let noResults = '';
+  activeList = '';
+  noResults += `
+  <li class = "student-item cf">
+    <div>
+       <span class="no-results">No Results to Display</span>
+    </div>
+  </li>`;
+ studentList.insertAdjacentHTML('beforeend', noResults);
 }
 
 search.addEventListener('keyup', () => {
@@ -79,6 +84,7 @@ searchBtn.addEventListener('click', () => {
   }
 });
 
+
 // 'showPage' fucntion that prints the page of students based on perPage variable
 
 function showPage(list, page) {
@@ -86,6 +92,7 @@ function showPage(list, page) {
   const endIndex = (page * perPage);
   let studentItem = '';
   studentList.innerHTML = '';
+  activeList = list;
 
   for ( let i = 0; i < list.length; i++ ) {
     if ( i >= startIndex && i < endIndex) {
@@ -137,7 +144,7 @@ function addPagination(list) {
 let maxPerPage = `
   <div class="dropdown">
     <span>Display </span>
-    <button type="button" class="active">${perPage}</button>
+    <button type="button" class="active-dropdown">${perPage}</button>
     <span> Students per page</span>
     <div id="myDropdown" class="dropdown-content">
       <button type="button">3</button>
@@ -148,8 +155,8 @@ let maxPerPage = `
   </div>`;
 
 footer.insertAdjacentHTML('beforeend', maxPerPage);
-const dropdown = document.querySelector('.dropdown');
-const dropdownContent = dropdown.querySelector('.dropdown-content');
+const dropdown = document.querySelector('.active-dropdown');
+const dropdownContent = document.querySelector('.dropdown-content');
 
 dropdown.addEventListener('click', (e) => {
   if(e.target.tagName == "BUTTON") {
@@ -159,13 +166,19 @@ dropdown.addEventListener('click', (e) => {
 
 dropdownContent.addEventListener('click', (e) => {
   if (e.target.tagName == 'BUTTON') {
-    let newPerPage = e.target.textContent;
-    let newPerPageInt = parseInt(newPerPage);
+    let newPerPage = parseInt(e.target.textContent);
     perPage = newPerPage;
-    console.log(perPage);
+    dropdownContent.className = "dropdown-content";
+    dropdown.textContent = perPage;
+    showPage(activeList, 1);
+    addPagination(activeList);
+    if (activeList.length == 0){
+      noResult();
+    }
   }
-  // dropdownContent.className = "dropdown-content";
 });
+
+
 
 // function calls on page load
 
