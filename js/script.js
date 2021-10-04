@@ -30,7 +30,7 @@ const searchBtn = header.querySelector('button');
 
 let namesOnly = [];
 for ( let i = 0; i < data.length; i++ ) {
-  namesOnly.push( {name: `${data[i].name.first} ${data[i].name.last}`} );
+  namesOnly.push(`${data[i].name.first} ${data[i].name.last}`);
 }
 
 // fucntion 'searchFunc' that runs on keyup or search button click
@@ -39,7 +39,7 @@ function searchFunc(searchInput, names) {
   let matchedNames = [];
   for ( let i = 0; i < names.length; i++ ) {
     if (searchInput.value.length != 0 &&
-     names[i].name.toLowerCase().includes(searchInput.value.toLowerCase()) ) {
+     names[i].toLowerCase().includes(searchInput.value.toLowerCase()) ) {
        matchedNames.push(data[i]);
      }
    }
@@ -170,8 +170,7 @@ dropdown.addEventListener('click', (e) => {
 
 dropdownContent.addEventListener('click', (e) => {
   if (e.target.tagName == 'BUTTON') {
-    let newPerPage = parseInt(e.target.textContent);
-    perPage = newPerPage;
+    perPage = parseInt(e.target.textContent);
     dropdownContent.className = "dropdown-content";
     dropdown.textContent = perPage;
     showPage(activeList, 1);
